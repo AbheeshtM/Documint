@@ -1,15 +1,10 @@
-Perfect 👍
-Here’s a clean, final, recruiter-ready README for DocuMint, followed by a short product description you can reuse on GitHub, Streamlit Cloud, and LinkedIn.
-
-You can copy–paste this directly.
-
-📘 DocuMint
+#📘DocuMint
 
 DocuMint is a production-grade, grounded Retrieval-Augmented Generation (RAG) system that allows users to query large documents with strict citations, zero hallucination, and full auditability.
 
 It is designed for real-world PDFs (policies, reports, technical docs) and supports documents up to 100 pages / 25 MB, deployed as a live Streamlit application.
 
-🚀 Overview
+##🚀 Overview
 
 DocuMint enables reliable document question-answering by combining:
 
@@ -27,14 +22,14 @@ Traceable to exact chunks and pages
 
 Safely refused when evidence is missing
 
-✨ Key Features
+##✨ Key Features
 📂 Universal Document Support
 
 Deterministic parsing for PDF, DOCX, TXT, HTML, CSV, Markdown, and source code
 
 LLM-assisted fallback parsing for unsupported formats
 
-🧠 Hybrid GenAI Architecture
+##🧠 Hybrid GenAI Architecture
 
 Local Embeddings
 Uses sentence-transformers locally (no external embedding APIs)
@@ -42,7 +37,7 @@ Uses sentence-transformers locally (no external embedding APIs)
 Groq LLMs
 Fast, free-tier friendly inference for grounded answer generation
 
-🔎 FAISS-Based Retrieval
+##🔎 FAISS-Based Retrieval
 
 Session-scoped FAISS vector index
 
@@ -50,7 +45,7 @@ Distance-based similarity search
 
 Safe fallback to prevent false “no context” refusals
 
-🧾 Strict Grounding & Safety
+##🧾 Strict Grounding & Safety
 
 Answers generated only from retrieved context
 
@@ -58,7 +53,7 @@ Explicit refusal for out-of-scope questions
 
 No hallucinations or external knowledge leakage
 
-🔐 Token & Memory Safety
+##🔐 Token & Memory Safety
 
 Enforced limits on:
 
@@ -70,7 +65,7 @@ Output tokens
 
 Prevents prompt overflow and instability
 
-📊 Structured Logging
+##📊 Structured Logging
 
 JSON logs for:
 
@@ -82,7 +77,7 @@ LLM latency
 
 Useful for debugging and evaluation
 
-📦 Exportable RAG Sessions
+##📦 Exportable RAG Sessions
 
 Download a complete session ZIP containing:
 
@@ -98,7 +93,7 @@ Chat history
 
 Configuration snapshot
 
-📏 System Limits
+##📏 System Limits
 Constraint	Value
 Max PDF pages	100 pages
 Max file size	25 MB
@@ -107,14 +102,14 @@ Embeddings	Local (sentence-transformers)
 
 Limits are intentional to ensure stable retrieval quality and performance.
 
-🛠️ Prerequisites
+##🛠️ Prerequisites
 
 Python 3.10+
 
 Groq API Key
 https://console.groq.com/keys
 
-⚙️ Installation
+##⚙️ Installation
 git clone https://github.com/AbheeshtM/Documint.git
 cd Documint
 
@@ -124,7 +119,7 @@ venv\Scripts\activate           # Windows
 
 pip install -r requirements.txt
 
-▶️ Running Locally
+##▶️ Running Locally
 Set Groq API Key
 
 Windows (PowerShell)
@@ -139,7 +134,7 @@ export GROQ_API_KEY="your_api_key_here"
 Launch App
 streamlit run app/streamlit_app.py
 
-☁️ Deployment (Streamlit Cloud – Free)
+##☁️ Deployment (Streamlit Cloud – Free)
 
 Push the repository to GitHub
 
@@ -156,7 +151,7 @@ app/streamlit_app.py
 
 Your app will be live with a public URL.
 
-🗂️ Project Structure
+##🗂️ Project Structure
 Documint/
 │
 ├── app/
@@ -178,7 +173,7 @@ Documint/
 ├── requirements.txt
 └── README.md
 
-🧠 Design Philosophy
+##🧠 Design Philosophy
 
 Grounded over clever
 
