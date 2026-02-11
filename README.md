@@ -1,184 +1,81 @@
-#📘DocuMint
-
-DocuMint is a production-grade, grounded Retrieval-Augmented Generation (RAG) system that allows users to query large documents with strict citations, zero hallucination, and full auditability.
-
-It is designed for real-world PDFs (policies, reports, technical docs) and supports documents up to 100 pages / 25 MB, deployed as a live Streamlit application.
-
-##🚀 Overview
-
-DocuMint enables reliable document question-answering by combining:
-
-Local embeddings
-
-FAISS vector search
-
-Groq LLMs for fast inference
-
-Every answer is:
-
-Grounded only in retrieved document text
-
-Traceable to exact chunks and pages
-
-Safely refused when evidence is missing
-
-##✨ Key Features
-📂 Universal Document Support
-
-Deterministic parsing for PDF, DOCX, TXT, HTML, CSV, Markdown, and source code
-
-LLM-assisted fallback parsing for unsupported formats
-
-##🧠 Hybrid GenAI Architecture
-
-Local Embeddings
-Uses sentence-transformers locally (no external embedding APIs)
-
-Groq LLMs
-Fast, free-tier friendly inference for grounded answer generation
-
-##🔎 FAISS-Based Retrieval
-
-Session-scoped FAISS vector index
-
-Distance-based similarity search
-
-Safe fallback to prevent false “no context” refusals
-
-##🧾 Strict Grounding & Safety
-
-Answers generated only from retrieved context
-
-Explicit refusal for out-of-scope questions
-
-No hallucinations or external knowledge leakage
-
-##🔐 Token & Memory Safety
-
-Enforced limits on:
-
-Query length
-
-Context size
-
-Output tokens
-
-Prevents prompt overflow and instability
-
-##📊 Structured Logging
-
-JSON logs for:
-
-Ingestion steps
-
-Retrieval scores
-
-LLM latency
-
-Useful for debugging and evaluation
-
-##📦 Exportable RAG Sessions
-
-Download a complete session ZIP containing:
-
-Original document
-
-Cleaned text
-
-Chunk metadata
-
-FAISS index
-
-Chat history
-
-Configuration snapshot
-
-##📏 System Limits
-Constraint	Value
-Max PDF pages	100 pages
-Max file size	25 MB
-Vector store	FAISS (local)
-Embeddings	Local (sentence-transformers)
-
-Limits are intentional to ensure stable retrieval quality and performance.
-
-##🛠️ Prerequisites
-
-Python 3.10+
-
-Groq API Key
-https://console.groq.com/keys
-
-##⚙️ Installation
-git clone https://github.com/AbheeshtM/Documint.git
-cd Documint
-
-python -m venv venv
-source venv/bin/activate        # Linux/macOS
-venv\Scripts\activate           # Windows
-
-pip install -r requirements.txt
-
-##▶️ Running Locally
-Set Groq API Key
-
-Windows (PowerShell)
-
-$env:GROQ_API_KEY="your_api_key_here"
-
-
-Linux / macOS
-
-export GROQ_API_KEY="your_api_key_here"
-
-Launch App
-streamlit run app/streamlit_app.py
-
-##☁️ Deployment (Streamlit Cloud – Free)
-
-Push the repository to GitHub
-
-Go to Streamlit Cloud
-
-Create a new app from the repo
-
-Add GROQ_API_KEY under Secrets
-
-Set entry point:
-
-app/streamlit_app.py
-
-
-Your app will be live with a public URL.
-
-##🗂️ Project Structure
-Documint/
-│
-├── app/
-│   └── streamlit_app.py
-│
-├── rag/
-│   ├── parsing.py
-│   ├── cleaning.py
-│   ├── chunking.py
-│   ├── embeddings.py
-│   ├── vector_store.py
-│   ├── retrieval.py
-│   ├── generation.py
-│   ├── export.py
-│   ├── config.py
-│   └── logging_utils.py
-│
-├── sessions/
-├── requirements.txt
-└── README.md
-
-##🧠 Design Philosophy
-
-Grounded over clever
-
-Auditable over opaque
-
-Stable over experimental
-
-DocuMint prioritizes trust, traceability, and correctness.
+# DocuMint
+
+A modular, production-ready Retrieval-Augmented Generation (RAG) system built with Python, LangChain, FAISS, and Groq LLM that processes upto 100 pages (25 mb file)
+
+## Features
+
+- **Universal File Support**: Deterministic parsing for PDF, DOCX, TXT, HTML, CSV, MD, and source code. LLM-assisted parsing for unknown formats.
+- **Hybrid GenAI Architecture**:
+  - **Local Embeddings**: Generates vectors locally using `sentence-transformers` (no external API calls for embedding).
+  - **Groq LLM**: High-speed generation using Groq's API.
+- **FAISS Vector Database**: Per-upload, sesQsion-based vector store for efficient retrieval.
+- **Strict Grounding**: Prompt templates enforce answers based solely on provided context with zero hallucination.
+- **Token & Memory Safety**: Strict enforcement of token limits for queries, context, and output.
+- **Structured Logging**: Production-friendly JSON logs for tracking performance, retrieval scores, and LLM latency.
+- **Exportable Sessions**: Download the entire RAG session (original file, cleaned text, metadata, FAISS index, chat history) as a ZIP.
+
+## Prerequisites
+
+- Python 3.10 or higher.
+- A [Groq API Key](https://console.groq.com/keys).
+
+## Installation
+
+1. **Clone the repository** (or navigate to the project directory).
+
+2. **Create a virtual environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## How to Run
+
+1. **Set your Groq API Key**:
+   - **Windows (PowerShell)**:
+     ```powershell
+     $env:GROQ_API_KEY="your_api_key_here"
+     ```
+   - **Linux/macOS**:
+     ```bash
+     export GROQ_API_KEY="your_api_key_here"
+     ```
+
+2. **Launch the Streamlit app**:
+   ```bash
+   streamlit run app/streamlit_app.py
+   ```
+
+3. **Use the App**:
+   - Upload a document via the sidebar or main area.
+   - Wait for the indexing process (extraction, cleaning, chunking, embedding).
+   - Start chatting with your document.
+   - Use the "Sources" expander to verify citations.
+   - Download the session ZIP if needed.
+
+## Project Structure
+
+- `app/`: Streamlit UI and session management.
+- `rag/`: Core RAG logic.
+  - `parsing.py`: Deterministic and LLM-assisted file parsing.
+  - `chunking.py`: Token-based text segmentation.
+  - `embeddings.py`: Local vector generation.
+  - `vector_store.py`: FAISS index management.
+  - `retrieval.py`: Similarity search and filtering.
+  - `generation.py`: Groq-powered grounded answer generation.
+  - `export.py`: ZIP bundle creation.
+  - `config.py`: Centralized configuration and limits.
+- `sessions/`: (Generated) Temporary storage for active RAG sessions.
+
+## Deployment
+
+To deploy to **Streamlit Cloud**:
+1. Push this project to a GitHub repository.
+2. Connect the repository to Streamlit Cloud.
+3. Add `GROQ_API_KEY` to the app's **Secrets**.
+4. Set the main file path to `app/streamlit_app.py`.
